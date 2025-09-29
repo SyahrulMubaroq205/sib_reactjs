@@ -41,7 +41,7 @@ export default function BookList({ books }) {
                             <span className="text-gray-500 text-xs ml-1">{book.rating}.0</span>
                         </div>
 
-                        {/* Harga */}
+                        {/* Price */}
                         <p className="font-bold text-lg text-gray-900 mb-4">
                             Rp{book.price.toLocaleString("id-ID")}
                         </p>

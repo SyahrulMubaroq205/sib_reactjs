@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 
-export default function FormBooks({ onAdd }) {
+export default function FormBook({ onAdd }) {
     const [newBook, setNewBook] = useState({
         title: "",
         author: "",
@@ -31,7 +31,7 @@ export default function FormBooks({ onAdd }) {
 
     return (
         <div className="max-w-6xl mx-auto mt-12 flex flex-col md:flex-row items-center gap-10 px-6">
-            {/* Kolom Gambar */}
+            {/* Gambar */}
             <div className="flex-1 flex justify-center items-center">
                 <img
                     src="/images/drawbook.png"
@@ -40,9 +40,9 @@ export default function FormBooks({ onAdd }) {
                 />
             </div>
 
-            {/* Kolom Form */}
+            {/* Form */}
             <div className="flex-1 w-full p-8 rounded-3xl backdrop-blur-md shadow-lg overflow-hidden relative">
-                {/* Animated Gradient Background */}
+                {/* Background */}
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-violet-300 to-blue-500 animate-gradient-background -z-10"></div>
 
                 <h2 className="text-2xl font-semibold mb-6 text-center md:text-left text-white relative z-10">
@@ -95,7 +95,7 @@ export default function FormBooks({ onAdd }) {
                 </form>
             </div>
 
-            {/* Gradient Animation Keyframes */}
+            {/* Gradient Animation */}
             <style jsx>{`
                 @keyframes gradient-background {
                     0% { background-position: 0% 50%; }
