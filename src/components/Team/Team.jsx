@@ -26,7 +26,7 @@ const teamMembers = [
 
 export default function Team() {
     return (
-        <section className="w-full flex flex-col items-center py-16 px-6">
+        <section className="w-full flex flex-col items-center py-8 px-6 mb-24">
             {/* Title */}
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Our Team</h2>
             <p className="text-gray-500 max-w-2xl text-center mb-12">

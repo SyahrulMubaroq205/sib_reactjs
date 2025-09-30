@@ -3,7 +3,7 @@ import { FiMail, FiPhone, FiMapPin } from "react-icons/fi";
 
 export default function Contact() {
     return (
-        <section className="w-full flex flex-col items-center py-16 px-6 rounded-xl bg-gradient-to-br from-purple-200 via-purple-100 to-pink-100">
+        <section className="w-full flex flex-col items-center py-20 px-6 rounded-xl bg-gradient-to-br from-purple-200 via-purple-100 to-pink-100">
             {/* Title */}
             <h2 className="text-4xl font-bold text-gray-800 mb-4">Contact Us</h2>
             <p className="text-gray-500 max-w-2xl text-center mb-12">
@@ -11,7 +11,7 @@ export default function Contact() {
                 to hear from you!
             </p>
 
-            <div className="grid md:grid-cols-2 gap-12 max-w-6xl w-full">
+            <div className="grid md:grid-cols-2 gap-16 max-w-6xl w-full">
                 {/* Contact Info */}
                 <div className="flex flex-col gap-8">
                     <div className="flex items-start gap-4">
