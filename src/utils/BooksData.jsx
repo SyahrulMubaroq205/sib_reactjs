@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-const books = [
+const booksData = [
     {
         id: uuidv4(),
         title: "The Time Miracle",
@@ -75,4 +75,4 @@ const books = [
     }
 ];
 
-export default books;
+export default booksData;
