@@ -11,9 +11,10 @@ export default function BookCreate() {
     title: "",
     price: 0,
     stock: 0,
+    year_published: "", // ✅ tambahkan ini
     genre_id: 0,
     author_id: 0,
-    cover_photo: null,
+    cover_image: null,
     description: "",
   });
 
@@ -28,7 +29,7 @@ export default function BookCreate() {
 
       setGenres(genresData);
       setAuthors(authorsData);
-    }
+    };
 
     fetchData();
   }, []);
@@ -36,10 +37,10 @@ export default function BookCreate() {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
 
-    if (name === "cover_photo") {
+    if (name === "cover_image") {
       setFormData({
         ...formData,
-        cover_photo: files[0],
+        cover_image: files[0],
       });
     } else {
       setFormData({
@@ -64,8 +65,8 @@ export default function BookCreate() {
       console.log(error);
       alert("Error creating book");
     }
-  }
-  
+  };
+
   return (
     <>
       <section className="bg-white dark:bg-gray-900">
@@ -77,7 +78,7 @@ export default function BookCreate() {
             <div className="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
               <div className="sm:col-span-2">
                 <label
-                  for="title"
+                  htmlFor="title"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Title
@@ -93,9 +94,10 @@ export default function BookCreate() {
                   required
                 />
               </div>
+
               <div className="w-full">
                 <label
-                  for="price"
+                  htmlFor="price"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Price
@@ -111,9 +113,10 @@ export default function BookCreate() {
                   required
                 />
               </div>
+
               <div className="w-full">
                 <label
-                  for="stock"
+                  htmlFor="stock"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Stock
@@ -130,9 +133,29 @@ export default function BookCreate() {
                 />
               </div>
 
+              {/* ✅ Tambahan Year Published */}
+              <div className="w-full">
+                <label
+                  htmlFor="year_published"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Year Published
+                </label>
+                <input
+                  type="number"
+                  name="year_published"
+                  id="year_published"
+                  value={formData.year_published}
+                  onChange={handleChange}
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-600 focus:border-indigo-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
+                  placeholder="e.g. 2024"
+                  required
+                />
+              </div>
+
               <div>
                 <label
-                  for="genre_id"
+                  htmlFor="genre_id"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Genre
@@ -145,16 +168,17 @@ export default function BookCreate() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
                 >
                   <option value="">--select genre--</option>
-                  {genres.map((genre) => (
+                  {genres?.map((genre) => (
                     <option key={genre.id} value={genre.id}>
                       {genre.name}
                     </option>
                   ))}
                 </select>
               </div>
+
               <div>
                 <label
-                  for="author_id"
+                  htmlFor="author_id"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Author
@@ -167,7 +191,7 @@ export default function BookCreate() {
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-indigo-500 dark:focus:border-indigo-500"
                 >
                   <option value="">--select author--</option>
-                  {authors.map((author) => (
+                  {authors?.map((author) => (
                     <option key={author.id} value={author.id}>
                       {author.name}
                     </option>
@@ -177,15 +201,15 @@ export default function BookCreate() {
 
               <div className="w-full">
                 <label
-                  for="cover_photo"
+                  htmlFor="cover_image"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Cover Photo
                 </label>
                 <input
                   type="file"
-                  name="cover_photo"
-                  id="cover_photo"
+                  name="cover_image"
+                  id="cover_image"
                   accept="image/*"
                   onChange={handleChange}
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full cursor-pointer dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white"
@@ -195,7 +219,7 @@ export default function BookCreate() {
 
               <div className="sm:col-span-2">
                 <label
-                  for="description"
+                  htmlFor="description"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
                   Description
@@ -211,6 +235,7 @@ export default function BookCreate() {
                 ></textarea>
               </div>
             </div>
+
             <div className="flex items-center space-x-4">
               <button
                 type="submit"

@@ -11,25 +11,23 @@ export const login = async ({ email, password }) => {
   }
 }
 
-export const logout = async ({ token }) => {
-  try {
-    const { data } = await API.post('/logout', { token }, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-    localStorage.removeItem('accessToken')
-    return data
-  } catch (error) {
-    console.log(error);
-    throw error
+export const logout = async () => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) {
+    localStorage.removeItem("accessToken");
+    return;
   }
-}
 
-
-
-
-
+  try {
+    await API.post('/logout', null, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+  } catch (error) {
+    console.error("Logout error:", error);
+  } finally {
+    localStorage.removeItem("accessToken");
+  }
+};
 
 export const useDecodeToken = (token) => {
   const { decodedToken, isExpired } = useJwt(token);
