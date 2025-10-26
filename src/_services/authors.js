@@ -47,11 +47,14 @@ export const createAuthor = async (formData) => {
   }
 };
 
-// authors.js
+// Update authors.js
 export const updateAuthor = async (id, authorData) => {
   try {
-    const { data } = await API.put(`/authors/${id}`, authorData, {
-      headers: getAuthHeaders(),
+    const { data } = await API.post(`/authors/${id}?_method=PUT`, authorData, {
+      headers: {
+        ...getAuthHeaders(),
+        "Content-Type": "multipart/form-data",
+      },
     });
     return data;
   } catch (error) {
@@ -59,6 +62,7 @@ export const updateAuthor = async (id, authorData) => {
     throw error;
   }
 };
+
 
 // DELETE author (admin)
 export const deleteAuthor = async (id) => {
