@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { showBook } from "../../../_services/books";
 import { useNavigate, useParams } from "react-router-dom";
-import { bookImageStorage } from "../../../_api";
 import { createTransaction } from "../../../_services/transactions";
 
 export default function ShowBook() {
@@ -11,6 +10,12 @@ export default function ShowBook() {
 
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("accessToken");
+
+  const getCoverImage = (cover) => {
+    if (!cover) return "/no-image.png"; // optional: fallback
+    if (cover.startsWith("http")) return cover;
+    return `http://127.0.0.1:8000/storage/${cover}`;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,7 +57,7 @@ export default function ShowBook() {
             <div className="shrink-0 max-w-md lg:max-w-lg mx-auto">
               <img
                 className="mx-auto h-full"
-                src={`${bookImageStorage}/${book.cover_photo}`}
+                src={getCoverImage(book.cover_image)}
                 alt=""
               />
             </div>
@@ -155,7 +160,7 @@ export default function ShowBook() {
                       value={quantity}
                       min={1}
                       onChange={(e) => setQuantity(e.target.value)}
-                      className="mt-1 block w-24 px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-dray-800 dark:border-gray-600 dark:text-white focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="mt-1 block w-24 px-3 py-2 border border-gray-300 rounded-md shadow-sm dark:bg-gray-800 text-gray-900 dark:text-white dark:border-gray-600 dark:focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     />
                   </div>
 

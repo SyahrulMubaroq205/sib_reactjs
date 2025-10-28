@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,6 +13,8 @@ export default function Books() {
         setBooks(booksData);
       } catch (error) {
         console.error("Failed to fetch books:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -21,15 +24,23 @@ export default function Books() {
   return (
     <section className="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-12">
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
-        <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
-          {books.length > 0 ? (
-            books.map((book) => {
-              // Gunakan cover_image dari backend, fallback ke placeholder
+        {isLoading ? (
+          // Loading spinner
+          <div className="flex flex-col items-center justify-center py-20">
+            <div className="w-10 h-10 border-4 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-300">
+              Loading books...
+            </p>
+          </div>
+        ) : books.length > 0 ? (
+          // Menampilkan daftar buku
+          <div className="mb-4 grid gap-4 sm:grid-cols-2 md:mb-8 lg:grid-cols-3 xl:grid-cols-4">
+            {books.map((book) => {
               const coverUrl = book.cover_image
                 ? book.cover_image.startsWith("http")
                   ? book.cover_image
                   : `http://localhost:8000/storage/${book.cover_image}`
-                : "/placeholder.png"; // Ganti dengan path placeholder
+                : "/placeholder.png";
 
               return (
                 <div
@@ -82,11 +93,30 @@ export default function Books() {
                   </div>
                 </div>
               );
-            })
-          ) : (
-            <p>No books found</p>
-          )}
-        </div>
+            })}
+          </div>
+        ) : (
+          // Kalau tidak ada buku
+          <div className="flex flex-col items-center justify-center py-20">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-10 w-10 text-gray-400 mb-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1.5}
+                d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V7m-2 4H5"
+              />
+            </svg>
+            <p className="text-gray-500 dark:text-gray-300">
+              No books found
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
