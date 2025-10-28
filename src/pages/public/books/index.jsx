@@ -45,47 +45,43 @@ export default function Books() {
               return (
                 <div
                   key={book.id}
-                  className="rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800"
+                  className="flex flex-col justify-between rounded-xl border border-gray-700 bg-gray-800 p-6 shadow-md transition-all hover:scale-[1.02] hover:shadow-lg"
                 >
-                  <div className="h-56 w-full">
+                  {/* COVER IMAGE */}
+                  <div className="h-60 w-full flex items-center justify-center bg-gray-900 rounded-lg overflow-hidden">
                     <Link to={`/books/show/${book.id}`}>
                       <img
-                        className="mx-auto h-full object-cover"
+                        className="h-full w-full object-cover"
                         src={coverUrl}
                         alt={book.title}
                       />
                     </Link>
                   </div>
-                  <div className="pt-6">
-                    <Link
-                      to={`/books/show/${book.id}`}
-                      className="text-lg font-semibold leading-tight text-gray-900 hover:underline dark:text-white"
-                    >
-                      {book.title}
-                    </Link>
 
-                    <ul className="mt-2 flex items-center gap-4">
-                      <li className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                          Fast Delivery
-                        </p>
-                      </li>
+                  {/* BOOK INFO */}
+                  <div className="flex flex-col justify-between flex-1 mt-4">
+                    <div>
+                      <Link
+                        to={`/books/show/${book.id}`}
+                        className="block text-base font-semibold text-white line-clamp-2 hover:underline"
+                      >
+                        {book.title}
+                      </Link>
 
-                      <li className="flex items-center gap-2">
-                        <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                          Best Price
-                        </p>
-                      </li>
-                    </ul>
+                      <ul className="mt-2 flex items-center gap-4 text-gray-400 text-sm">
+                        <li>Fast Delivery</li>
+                        <li>Best Price</li>
+                      </ul>
+                    </div>
 
-                    <div className="mt-4 flex items-center justify-between gap-4">
-                      <p className="text-2xl font-extrabold leading-tight text-gray-900 dark:text-white">
-                        Rp{book.price}
+                    <div className="mt-4 flex items-center justify-between">
+                      <p className="text-lg font-bold text-white">
+                        Rp{parseInt(book.price).toLocaleString("id-ID")}
                       </p>
 
                       <Link
                         to={`/books/show/${book.id}`}
-                        className="inline-flex items-center rounded-lg bg-indigo-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-indigo-800 focus:outline-none focus:ring-4  focus:ring-indigo-300 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-800"
+                        className="inline-flex items-center rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
                       >
                         View detail
                       </Link>
